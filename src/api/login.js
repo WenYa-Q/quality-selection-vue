@@ -35,3 +35,11 @@ export const GetValidateCode = () => {
     method: "get",
   });
 };
+
+// 退出功能
+export const Logout = () => {
+  return request({
+    url: "/sys/user/logout",
+    method: "get",
+  });
+};
