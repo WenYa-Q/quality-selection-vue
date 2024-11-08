@@ -14,7 +14,7 @@ import request from "@/utils/request";
 // 登录接口
 export const Login = (data) => {
   return request({
-    url: "/api/login",
+    url: "/sys/user/login",
     method: "post",
     data,
   });
@@ -23,7 +23,15 @@ export const Login = (data) => {
 // 获取登录用户信息
 export const GetUserinfo = () => {
   return request({
-    url: "/api/userinfo",
+    url: "/sys/user/getUserInfo",
+    method: "get",
+  });
+};
+
+// 获取验证码
+export const GetValidateCode = () => {
+  return request({
+    url: "/sys/user/generateValidateCode",
     method: "get",
   });
 };

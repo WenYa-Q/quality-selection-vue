@@ -6,5 +6,6 @@ export default {
   loginsuccess: "登录成功",
   "rules-username": "请输入用户名",
   "rules-password": "请输入密码",
+  "rules-validate-code": "验证码不能为空",
   "rules-regpassword": "长度在 6 到 12 个字符",
 };
