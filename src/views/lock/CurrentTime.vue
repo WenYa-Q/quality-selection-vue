@@ -71,15 +71,17 @@ export default defineComponent({
 .current-time {
   color: #fff;
   text-align: center;
+
   ::v-deep {
     .time {
-      font-family: Arial;
+      font-family: Arial, sans-serif;
       font-size: 48px;
       font-weight: 700;
     }
+
     .date {
-      font-size: 20px;
       margin-top: 16px;
+      font-size: 20px;
     }
   }
 }

@@ -53,11 +53,11 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .icon {
-  margin-right: 10px;
   width: 16px !important;
   height: 16px !important;
+  margin-right: 10px;
   font-size: 16px;
+  color: currentcolor;
   text-align: center;
-  color: currentColor;
 }
 </style>

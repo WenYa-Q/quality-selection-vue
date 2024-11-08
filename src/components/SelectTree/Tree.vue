@@ -22,7 +22,7 @@
  -->
 
 <template>
-  <div v-if="data.length <= 0" style="text-align: center; padding: 16px">暂无数据</div>
+  <div v-if="data.length <= 0" style=" padding: 16px;text-align: center">暂无数据</div>
   <el-tree
     v-else
     class="common-tree"
@@ -115,10 +115,11 @@ export default defineComponent({
 <style lang="scss" scoped>
 .common-tree {
   overflow: auto;
+
   :deep {
     .el-tree-node {
       &.is-checked {
-        > .el-tree-node__content {
+        > .el-tree-node-content {
           color: $mainColor;
         }
       }

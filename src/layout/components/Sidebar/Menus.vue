@@ -93,7 +93,7 @@ export default defineComponent({
 <style lang="scss">
 // menu hover
 .el-menu-item,
-.el-sub-menu__title {
+.el-sub-menu-title {
   &:hover {
     background-color: $menuHover !important;
   }
@@ -101,7 +101,7 @@ export default defineComponent({
 
 .el-sub-menu {
   .el-menu-item,
-  .el-sub-menu .el-sub-menu__title {
+  .el-sub-menu .el-sub-menu-title {
     background-color: $subMenuBg !important;
 
     &:hover {
@@ -109,55 +109,58 @@ export default defineComponent({
     }
   }
 }
+
 .el-menu-item.is-active {
   background-color: $menuActiveBg !important;
+
   &:hover {
     background-color: $menuActiveBg !important;
   }
 }
 
-.el-menu--collapse {
+.el-menu-collapse {
   .el-menu-item.is-active,
-  .el-sub-menu.is-active > .el-sub-menu__title {
+  .el-sub-menu.is-active > .el-sub-menu-title {
     position: relative;
-    background-color: $collapseMenuActiveBg !important;
     color: $collapseMenuActiveColor !important;
+    background-color: $collapseMenuActiveBg !important;
+
     &::before {
-      content: "";
       position: absolute;
-      left: 0;
       top: 0;
+      left: 0;
       width: $collapseMenuActiveBorderWidth;
       height: 100%;
+      content: "";
       background-color: $collapseMenuActiveBorderColor;
     }
   }
 }
 
-.el-sub-menu__title i {
+.el-sub-menu-title i {
   color: $arrowColor;
 }
 
 // 水平菜单
-.el-menu--horizontal {
-  .el-menu-item,
-  .el-sub-menu .el-sub-menu__title {
+.el-menu-horizontal {
+  .el-menu-item .el-sub-menu .el-sub-menu-title {
     height: $horizontalMenuHeight;
     line-height: $horizontalMenuHeight;
     border-bottom: none;
   }
+
   .el-menu-item.is-active,
-  .el-sub-menu.is-active .el-sub-menu__title {
+  .el-sub-menu.is-active .el-sub-menu-title {
     border: none;
   }
 }
 </style>
 <style lang="scss" scoped>
 .scroll {
-  height: auto;
   flex: 1;
-  overflow-x: hidden;
-  overflow-y: auto;
+  height: auto;
+  overflow: hidden auto;
+
   .menu {
     border: none;
   }

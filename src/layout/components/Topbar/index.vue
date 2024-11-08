@@ -104,33 +104,40 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .header {
-  height: 48px;
-  border-bottom: 1px solid #e0e4ef;
   display: flex;
   justify-content: space-between;
+  height: 48px;
+  border-bottom: 1px solid #e0e4ef;
+
   &.no-border {
     border: none;
   }
+
   .navigation {
     display: flex;
     align-items: center;
     overflow: hidden;
   }
+
   .action {
     display: flex;
     align-items: center;
   }
 }
+
 .mobile {
   padding-right: 0;
+
   ::v-deep(.logo) {
     max-width: 24px;
     max-height: 24px;
   }
+
   ::v-deep(.title) {
     display: none;
   }
 }
+
 .show-title {
   ::v-deep(.title) {
     display: block;

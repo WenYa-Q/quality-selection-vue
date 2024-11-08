@@ -52,9 +52,10 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .fold-btn {
-  line-height: 48px;
   padding: 0 10px;
+  line-height: 48px;
   cursor: pointer;
+
   &.collapse {
     transform: scale(-1, 1);
   }

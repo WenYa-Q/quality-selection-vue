@@ -95,92 +95,105 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .tags-container {
-  height: 32px;
   width: 100%;
+  height: 32px;
   background: #fff;
   border-bottom: 1px solid #e0e4ef;
+
   &.hide {
     display: none;
   }
+
   .scroll-container {
-    white-space: nowrap;
     overflow: hidden;
-    ::v-deep(.el-scrollbar__bar) {
-      bottom: 0px;
+    white-space: nowrap;
+
+    ::v-deep(.el-scrollbar-bar) {
+      bottom: 0;
     }
   }
 
   .tags-item {
+    box-sizing: border-box;
     display: inline-block;
     height: 32px;
-    line-height: 32px;
-    box-sizing: border-box;
-    border-left: 1px solid #e6e6e6;
-    border-right: 1px solid #e6e6e6;
-    color: #5c5c5c;
-    background: #fff;
     padding: 0 8px;
-    font-size: 12px;
     margin-left: -1px;
+    font-size: 12px;
+    line-height: 32px;
+    color: #5c5c5c;
     vertical-align: bottom;
     cursor: pointer;
+    background: #fff;
+    border-right: 1px solid #e6e6e6;
+    border-left: 1px solid #e6e6e6;
+
     &:first-of-type {
       margin-left: 15px;
     }
+
     &:last-of-type {
       margin-right: 15px;
     }
+
     &.active {
       color: #303133;
       background: #f5f5f5;
     }
+
     .title {
       display: inline-block;
-      vertical-align: top;
       max-width: 200px;
       overflow: hidden;
-      white-space: nowrap;
       text-overflow: ellipsis;
+      white-space: nowrap;
+      vertical-align: top;
     }
+
     .el-icon-close {
-      color: #5c5c5c;
-      margin-left: 8px;
       width: 16px;
       height: 16px;
+      margin-left: 8px;
+      color: #5c5c5c;
+      text-align: center;
       vertical-align: -2px;
       border-radius: 50%;
-      text-align: center;
       transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
       transform-origin: 100% 50%;
-      &:before {
-        transform: scale(0.8);
+
+      &::before {
         display: inline-block;
         vertical-align: -2px;
+        transform: scale(0.8);
       }
+
       &:hover {
-        background-color: #333;
         color: #fff;
+        background-color: #333;
       }
     }
   }
 }
+
 .contextmenu {
-  margin: 0;
-  background: #fff;
-  z-index: 3000;
   position: fixed;
-  list-style-type: none;
+  z-index: 3000;
   padding: 5px 0;
-  border-radius: 4px;
+  margin: 0;
   font-size: 12px;
   font-weight: 400;
   color: #333;
-  box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.3);
   white-space: nowrap;
+  list-style-type: none;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 2px 2px 3px 0 rgb(0 0 0 / 30%);
+
   li {
-    margin: 0;
     padding: 8px 16px;
+    margin: 0;
     cursor: pointer;
+
     &:hover {
       background: #eee;
     }

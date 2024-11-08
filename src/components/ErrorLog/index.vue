@@ -126,13 +126,14 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.errLog-container {
+.err-log-container {
   margin-right: 10px;
 }
+
 .message-title {
-  font-size: 16px;
-  color: #333;
-  font-weight: bold;
   padding-right: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
 }
 </style>

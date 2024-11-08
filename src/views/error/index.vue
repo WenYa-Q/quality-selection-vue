@@ -42,24 +42,27 @@ export default defineComponent({
 <style lang="scss" scoped>
 .error {
   position: relative;
-  text-align: center;
   padding-top: 48px;
+  text-align: center;
+
   .code-403 {
     position: absolute;
-    font-size: 50px;
     top: 148px;
     left: 50%;
-    transform: translateX(32px);
-    font-family: arial;
+    font-family: Arial, sans-serif;
+    font-size: 50px;
     color: #ee5c42;
+    transform: translateX(32px);
   }
+
   .error-img {
     font-size: 320px;
     pointer-events: none;
   }
+
   .title {
-    font-size: 20px;
     margin: 32px 0;
+    font-size: 20px;
   }
 }
 </style>

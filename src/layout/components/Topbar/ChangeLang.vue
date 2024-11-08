@@ -75,14 +75,16 @@ const { changeLang } = useLang();
 
 <style lang="scss" scoped>
 .change-lang {
-  padding: 0 16px;
-  height: 48px;
-  cursor: pointer;
   display: flex;
   align-items: center;
+  height: 48px;
+  padding: 0 16px;
+  cursor: pointer;
+
   &:hover {
     background: #f5f5f5;
   }
+
   .icon {
     font-size: 18px;
   }

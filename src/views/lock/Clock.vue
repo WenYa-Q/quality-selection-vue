@@ -117,9 +117,10 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@import "./style/style.css";
+@import url("./style/style.css");
+
 .clock-wrapper {
-  transform: scale(0.7);
   margin: 0;
+  transform: scale(0.7);
 }
 </style>

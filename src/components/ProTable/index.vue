@@ -463,46 +463,55 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .page-box {
-  width: 100%;
   box-sizing: border-box;
+  width: 100%;
+
   .search {
-    padding: 20px 20px 0;
-    background: #fff;
-    margin-bottom: 10px;
     display: flex;
     flex-wrap: wrap;
+    padding: 20px 20px 0;
+    margin-bottom: 10px;
+    background: #fff;
+
     .el-form-item {
       margin-bottom: 20px;
     }
+
     .search-btn {
       margin-left: auto;
     }
-    :deep(.el-input-number .el-input__inner) {
+
+    :deep(.el-input-number .el-input-inner) {
       text-align: left;
     }
-    :deep(.el-range-editor.el-input__wrapper) {
+
+    :deep(.el-range-editor.el-input-wrapper) {
       box-sizing: border-box;
     }
   }
 
   .head {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     padding: 20px 20px 0;
     background: #fff;
+
     .title {
       font-size: 16px;
     }
   }
+
   .table {
     padding: 20px;
     background: #fff;
   }
+
   .pagination {
+    justify-content: flex-end;
     padding: 0 20px 20px;
     background: #fff;
-    justify-content: flex-end;
+
     :last-child {
       margin-right: 0;
     }

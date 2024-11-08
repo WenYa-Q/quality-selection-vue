@@ -207,49 +207,51 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .title {
-  color: #fff;
-  text-align: center;
-  font-size: 32px;
-  margin: 0;
   display: flex;
   align-items: flex-end;
+  margin: 0;
+  font-size: 32px;
+  color: #fff;
+  text-align: center;
+
   .unlock-btn {
-    color: #aaa;
+    margin-left: 10px;
     font-size: 16px;
     font-weight: normal;
-    margin-left: 10px;
+    color: #aaa;
     cursor: pointer;
   }
 }
+
 .unlock-modal {
   position: fixed;
+  inset: 0;
   z-index: 10;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(8px);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background: rgb(0 0 0 / 30%);
+  backdrop-filter: blur(8px);
 
-  ::v-deep(.el-input-group__append) {
+  ::v-deep(.el-input-group-append) {
     background: $mainColor !important;
     border-color: $mainColor !important;
   }
 
   .btn-unlock {
-    background: $mainColor !important;
     color: #fff !important;
+    background: $mainColor !important;
+
     ::v-deep(i) {
       transform: scale(1.5);
     }
   }
 }
+
 .userinfo-unlock {
   margin-bottom: 16px;
+
   ::v-deep(h3) {
     color: #fff;
   }

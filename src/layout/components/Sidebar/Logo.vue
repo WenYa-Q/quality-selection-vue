@@ -54,22 +54,24 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .brand {
-  height: 48px;
-  padding: 0 8px;
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 48px;
+  padding: 0 8px;
+
   .logo {
-    cursor: pointer;
     max-width: 32px;
     max-height: 32px;
+    cursor: pointer;
   }
+
   .title {
-    color: #fff;
+    margin-left: 8px;
     font-size: 14px;
     font-weight: 700;
+    color: #fff;
     white-space: nowrap;
-    margin-left: 8px;
     transition: all 0.5s;
   }
 }

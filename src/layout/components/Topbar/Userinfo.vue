@@ -101,22 +101,25 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .userinfo {
+  display: flex;
+  align-items: center;
   padding: 0 16px;
   line-height: 48px;
   cursor: pointer;
-  display: flex;
-  align-items: center;
+
   &:hover {
     background: #f5f5f5;
   }
+
   .el-icon-user {
+    margin-right: 8px;
     font-size: 20px;
-    margin-right: 8px;
   }
+
   .avatar {
-    margin-right: 8px;
     width: 32px;
     height: 32px;
+    margin-right: 8px;
     border-radius: 50%;
   }
 }

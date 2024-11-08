@@ -39,7 +39,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.errPage-container {
+.err-page-container {
   padding: 30px;
 }
 </style>

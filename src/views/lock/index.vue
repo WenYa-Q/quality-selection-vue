@@ -61,13 +61,13 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .lock-wrap {
-  background: #222;
-  height: 100%;
-  min-height: 480px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 100%;
+  min-height: 480px;
   overflow: hidden;
+  background: #222;
 }
 </style>

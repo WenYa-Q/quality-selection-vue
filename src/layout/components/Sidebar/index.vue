@@ -73,35 +73,38 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .left {
-  width: 210px;
-  background: $menuBg;
-  transition: all 0.3s;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
+  width: 210px;
+  overflow: hidden;
+  background: $menuBg;
+  transition: all 0.3s;
+
   &.collapse {
     width: 64px;
+
     ::v-deep(.brand .title) {
       display: none;
     }
   }
+
   &.mobile {
-    height: 100%;
     position: fixed;
-    left: 0;
     top: 0;
+    left: 0;
     z-index: 10;
+    height: 100%;
+
     & + .mask {
       position: fixed;
-      left: 0;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.3);
+      inset: 0;
       z-index: 9;
+      background: rgb(0 0 0 / 30%);
     }
+
     &.collapse {
       transform: translateX(-100%);
+
       & + .mask {
         display: none;
       }

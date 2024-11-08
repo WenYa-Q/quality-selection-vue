@@ -132,37 +132,42 @@ export default defineComponent({
 <style lang="scss" scoped>
 .breadcrumb {
   margin-left: 10px;
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
+
   ::v-deep(a),
   ::v-deep(.is-link) {
     font-weight: normal;
   }
+
   // ::v-deep(.el-breadcrumb__item) {
   //   float: none;
   // }
-  .no_link {
-    ::v-deep(.el-breadcrumb__inner) {
+  .no-link {
+    ::v-deep(.el-breadcrumb-inner) {
       color: #97a8be !important;
     }
   }
+
   &.mobile {
     display: none;
   }
+
   &.show {
     display: block;
-    margin: 0;
     padding: 16px;
+    margin: 0;
     background: #f5f5f5;
   }
+
   &.hide {
     display: none;
   }
 }
 </style>
 <style lang="scss">
-.el-breadcrumb__inner {
+.el-breadcrumb-inner {
   &.is-link,
   a {
     color: #5c5c5c;
