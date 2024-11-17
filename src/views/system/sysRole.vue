@@ -43,23 +43,29 @@
         <el-button type="primary" size="small" @click="editShow(scope.row)">
           修改
         </el-button>
-        <el-button type="danger" size="small">
+        <el-button type="danger" size="small" @click="deleteById(scope.row)">
           删除
         </el-button>
       </el-table-column>
     </el-table>
 
     <!--分页条-->
-    <el-pagination v-model:current-page="pageParams.pageNum" v-model:page-size="pageParams.pageSize"
-      :page-sizes="[10, 20, 50, 100]" @size-change="fetchData" @current-change="fetchData"
-      layout="total, sizes, prev, pager, next" :total="total" />
+    <el-pagination
+      v-model:current-page="pageParams.pageNum"
+      v-model:page-size="pageParams.pageSize"
+      :page-sizes="[10, 20, 50, 100]"
+      @size-change="fetchData"
+      @current-change="fetchData"
+      layout="total, sizes, prev, pager, next"
+      :total="total"
+    />
   </div>
 </template>
 
 <script setup>
 import { onMounted, ref } from "vue";
-import { GetSysRoleListByPage, SaveSysRole, UpdateSysRole} from "@/api/sysRole";
-import { ElMessage } from "element-plus";
+import { GetSysRoleListByPage, SaveSysRole, UpdateSysRole, DeleteSysRoleById } from "@/api/sysRole";
+import { ElMessage, ElMessageBox } from "element-plus";
 
 // 分页条总记录数
 let total = ref(0);
@@ -94,6 +100,22 @@ const editShow = (row) => {
   dialogVisible.value = true;
 };
 
+//删除用户
+const deleteById = async (row) => {
+  ElMessageBox.confirm('此操作将永久删除该记录, 是否继续?', 'Warning', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+    }).then(async () => {
+       const {code } = await DeleteSysRoleById(row.id)
+       if(code === 200) {
+            ElMessage.success('删除成功')
+            pageParams.value.page = 1
+            fetchData()
+       }
+    })
+};
+
 //查询角色
 const searchSysRole = () => {
   fetchData();
@@ -114,7 +136,7 @@ const submit = async () => {
       ElMessage.success("添加成功");
       fetchData();
     }
-  }else {
+  } else {
     const { code } = await UpdateSysRole(sysRole.value);
     if (code === 200) {
       dialogVisible.value = false;
