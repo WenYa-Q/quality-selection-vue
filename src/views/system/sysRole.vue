@@ -39,8 +39,8 @@
       <el-table-column prop="roleName" label="角色名称" width="180" />
       <el-table-column prop="roleCode" label="角色code" width="180" />
       <el-table-column prop="createTime" label="创建时间" />
-      <el-table-column label="操作" align="center" width="280">
-        <el-button type="primary" size="small">
+      <el-table-column label="操作" align="center" width="280" #default="scope">
+        <el-button type="primary" size="small" @click="editShow(scope.row)">
           修改
         </el-button>
         <el-button type="danger" size="small">
@@ -50,21 +50,16 @@
     </el-table>
 
     <!--分页条-->
-    <el-pagination
-      v-model:current-page="pageParams.pageNum"
-      v-model:page-size="pageParams.pageSize"
-      :page-sizes="[10, 20, 50, 100]"
-      @size-change="fetchData"
-      @current-change="fetchData"
-      layout="total, sizes, prev, pager, next"
-      :total="total"
-    />
+    <el-pagination v-model:current-page="pageParams.pageNum" v-model:page-size="pageParams.pageSize"
+      :page-sizes="[10, 20, 50, 100]" @size-change="fetchData" @current-change="fetchData"
+      layout="total, sizes, prev, pager, next" :total="total" />
   </div>
 </template>
 
 <script setup>
 import { onMounted, ref } from "vue";
-import { GetSysRoleListByPage, SaveSysRole } from "@/api/sysRole";
+import { GetSysRoleListByPage, SaveSysRole, UpdateSysRole} from "@/api/sysRole";
+import { ElMessage } from "element-plus";
 
 // 分页条总记录数
 let total = ref(0);
@@ -93,6 +88,12 @@ const addShow = () => {
   dialogVisible.value = true;
 };
 
+//修改用户
+const editShow = (row) => {
+  sysRole.value = row;
+  dialogVisible.value = true;
+};
+
 //查询角色
 const searchSysRole = () => {
   fetchData();
@@ -102,14 +103,25 @@ const defaultForm = {
   roleName: "",
   roleCode: "",
 };
+
+//提交
 const sysRole = ref(defaultForm);
 const submit = async () => {
-  const { code, data, message } = await SaveSysRole(sysRole.value);
-  if (code === 200) {
-    dialogVisible.value = false;
-    fetchData();
+  if (!sysRole.value.id) {
+    const { code, data, message } = await SaveSysRole(sysRole.value);
+    if (code === 200) {
+      dialogVisible.value = false;
+      ElMessage.success("添加成功");
+      fetchData();
+    }
+  }else {
+    const { code } = await UpdateSysRole(sysRole.value);
+    if (code === 200) {
+      dialogVisible.value = false;
+      ElMessage.success("修改成功");
+      fetchData();
+    }
   }
-  alert("添加失败，原因是：", message);
 };
 
 //获取表格数据

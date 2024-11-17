@@ -17,3 +17,12 @@ export const SaveSysRole = (data) => {
     data,
   });
 };
+
+// 保存修改
+export const UpdateSysRole = (data) => {
+  return request({
+      url: '/sys/role/updateSysRole',
+      method: 'put',
+      data
+  })
+}
