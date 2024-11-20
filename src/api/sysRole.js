@@ -21,16 +21,16 @@ export const SaveSysRole = (data) => {
 // 保存修改
 export const UpdateSysRole = (data) => {
   return request({
-      url: '/sys/role/updateSysRole',
-      method: 'put',
-      data
-  })
-}
+    url: "/sys/role/updateSysRole",
+    method: "put",
+    data,
+  });
+};
 
 // 删除角色
 export const DeleteSysRoleById = (roleId) => {
   return request({
-      url: '/sys/role/deleteById/' + roleId,
-      method: 'delete'
-  })
-}
+    url: "/sys/role/deleteById/" + roleId,
+    method: "delete",
+  });
+};

@@ -102,18 +102,18 @@ const editShow = (row) => {
 
 //删除用户
 const deleteById = async (row) => {
-  ElMessageBox.confirm('此操作将永久删除该记录, 是否继续?', 'Warning', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning',
-    }).then(async () => {
-       const {code } = await DeleteSysRoleById(row.id)
-       if(code === 200) {
-            ElMessage.success('删除成功')
-            pageParams.value.page = 1
-            fetchData()
-       }
-    })
+  ElMessageBox.confirm("此操作将永久删除该记录, 是否继续?", "Warning", {
+    confirmButtonText: "确定",
+    cancelButtonText: "取消",
+    type: "warning",
+  }).then(async () => {
+    const { code } = await DeleteSysRoleById(row.id);
+    if (code === 200) {
+      ElMessage.success("删除成功");
+      pageParams.value.page = 1;
+      fetchData();
+    }
+  });
 };
 
 //查询角色
