@@ -10,8 +10,15 @@
         </el-col>
         <el-col :span="12">
           <el-form-item label="创建时间">
-            <el-date-picker v-model="createTimes" type="daterange" range-separator="To" start-placeholder="开始时间"
-              end-placeholder="结束时间" format="YYYY-MM-DD" value-format="YYYY-MM-DD" />
+            <el-date-picker
+              v-model="createTimes"
+              type="daterange"
+              range-separator="To"
+              start-placeholder="开始时间"
+              end-placeholder="结束时间"
+              format="YYYY-MM-DD"
+              value-format="YYYY-MM-DD"
+            />
           </el-form-item>
         </el-col>
       </el-row>
@@ -44,8 +51,11 @@
         <el-input v-model="sysUser.phone" />
       </el-form-item>
       <el-form-item label="头像">
-        <el-upload class="avatar-uploader" action="http://localhost:8501/admin/system/fileUpload"
-          :show-file-list="false">
+        <el-upload
+          class="avatar-uploader"
+          action="http://localhost:8501/admin/system/fileUpload"
+          :show-file-list="false"
+        >
           <img v-if="sysUser.avatar" :src="sysUser.avatar" class="avatar" />
           <el-icon v-else class="avatar-uploader-icon">
             <Plus />
@@ -80,7 +90,7 @@
       <el-button type="primary" size="small" @click="editSysUser(scope.row)">
         修改
       </el-button>
-      <el-button type="danger" size="small">
+      <el-button type="danger" size="small" @click="deleteById(scope.row)">
         删除
       </el-button>
       <el-button type="warning" size="small">
@@ -89,15 +99,21 @@
     </el-table-column>
   </el-table>
 
-  <el-pagination v-model:current-page="pageParams.page" v-model:page-size="pageParams.limit"
-    :page-sizes="[10, 20, 50, 100]" @size-change="fetchData" @current-change="fetchData"
-    layout="total, sizes, prev, pager, next" :total="total" />
+  <el-pagination
+    v-model:current-page="pageParams.page"
+    v-model:page-size="pageParams.limit"
+    :page-sizes="[10, 20, 50, 100]"
+    @size-change="fetchData"
+    @current-change="fetchData"
+    layout="total, sizes, prev, pager, next"
+    :total="total"
+  />
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue";
-import { GetSysUserListByPage, SaveSysUser, UpdateSysUser } from "@/api/sysUser";
-import { ElMessage } from "element-plus";
+import { GetSysUserListByPage, SaveSysUser, UpdateSysUser, DeleteSysUserById } from "@/api/sysUser";
+import { ElMessage, ElMessageBox } from "element-plus";
 
 // 表格数据模型
 const list = ref([]);
@@ -156,8 +172,8 @@ function addShow() {
 
 // 修改按钮点击事件处理函数
 function editSysUser(row) {
-  dialogVisible.value = true
-  sysUser.value = { ...row }
+  dialogVisible.value = true;
+  sysUser.value = { ...row };
 }
 
 // 定义分页查询方法
@@ -192,7 +208,21 @@ async function submit() {
       fetchData();
     }
   }
+}
 
+// 删除角色
+function deleteById (row) {
+    ElMessageBox.confirm('此操作将永久删除该记录, 是否继续?', 'Warning', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+    }).then(async () => {
+       const {code } = await DeleteSysUserById(row.id)
+       if(code === 200) {
+            ElMessage.success('删除成功')
+            fetchData()
+       }
+    })
 }
 </script>
 
