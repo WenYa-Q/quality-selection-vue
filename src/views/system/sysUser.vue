@@ -10,15 +10,8 @@
         </el-col>
         <el-col :span="12">
           <el-form-item label="创建时间">
-            <el-date-picker
-              v-model="createTimes"
-              type="daterange"
-              range-separator="To"
-              start-placeholder="开始时间"
-              end-placeholder="结束时间"
-              format="YYYY-MM-DD"
-              value-format="YYYY-MM-DD"
-            />
+            <el-date-picker v-model="createTimes" type="daterange" range-separator="To" start-placeholder="开始时间"
+              end-placeholder="结束时间" format="YYYY-MM-DD" value-format="YYYY-MM-DD" />
           </el-form-item>
         </el-col>
       </el-row>
@@ -37,38 +30,37 @@
   </div>
 
   <el-dialog v-model="dialogVisible" title="添加或修改" width="40%">
-        <el-form label-width="120px">
-            <el-form-item label="用户名">
-                <el-input v-model="sysUser.userName"/>
-            </el-form-item>
-            <el-form-item v-if="sysUser.id == null" label="密码">
-                <el-input type="password" show-password v-model="sysUser.password"/>
-            </el-form-item>
-            <el-form-item label="姓名">
-                <el-input v-model="sysUser.name"/>
-            </el-form-item>
-            <el-form-item label="手机">
-                <el-input v-model="sysUser.phone"/>
-            </el-form-item>
-            <el-form-item label="头像">
-                <el-upload
-                        class="avatar-uploader"
-                        action="http://localhost:8501/admin/system/fileUpload"
-                        :show-file-list="false"
-                        >
-                    <img v-if="sysUser.avatar" :src="sysUser.avatar" class="avatar" />
-                    <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
-                </el-upload>
-            </el-form-item>
-            <el-form-item label="描述">
-                <el-input  v-model="sysUser.description"/>
-            </el-form-item>
-            <el-form-item>
-                <el-button type="primary" @click="submit">提交</el-button>
-                <el-button @click="dialogVisible = false">取消</el-button>
-            </el-form-item>
-        </el-form>
-    </el-dialog> 
+    <el-form label-width="120px">
+      <el-form-item label="用户名">
+        <el-input v-model="sysUser.userName" />
+      </el-form-item>
+      <el-form-item v-if="sysUser.id == null" label="密码">
+        <el-input type="password" show-password v-model="sysUser.password" />
+      </el-form-item>
+      <el-form-item label="姓名">
+        <el-input v-model="sysUser.name" />
+      </el-form-item>
+      <el-form-item label="手机">
+        <el-input v-model="sysUser.phone" />
+      </el-form-item>
+      <el-form-item label="头像">
+        <el-upload class="avatar-uploader" action="http://localhost:8501/admin/system/fileUpload"
+          :show-file-list="false">
+          <img v-if="sysUser.avatar" :src="sysUser.avatar" class="avatar" />
+          <el-icon v-else class="avatar-uploader-icon">
+            <Plus />
+          </el-icon>
+        </el-upload>
+      </el-form-item>
+      <el-form-item label="描述">
+        <el-input v-model="sysUser.description" />
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="submit">提交</el-button>
+        <el-button @click="dialogVisible = false">取消</el-button>
+      </el-form-item>
+    </el-form>
+  </el-dialog>
 
   <!---数据表格-->
   <el-table :data="list" style="width: 100%">
@@ -83,8 +75,9 @@
       {{ scope.row.status == 1 ? "正常" : "停用" }}
     </el-table-column>
     <el-table-column prop="createTime" label="创建时间" />
-    <el-table-column label="操作" align="center" width="280">
-      <el-button type="primary" size="small">
+
+    <el-table-column label="操作" align="center" width="280" #default="scope">
+      <el-button type="primary" size="small" @click="editSysUser(scope.row)">
         修改
       </el-button>
       <el-button type="danger" size="small">
@@ -96,20 +89,14 @@
     </el-table-column>
   </el-table>
 
-  <el-pagination
-    v-model:current-page="pageParams.page"
-    v-model:page-size="pageParams.limit"
-    :page-sizes="[10, 20, 50, 100]"
-    @size-change="fetchData"
-    @current-change="fetchData"
-    layout="total, sizes, prev, pager, next"
-    :total="total"
-  />
+  <el-pagination v-model:current-page="pageParams.page" v-model:page-size="pageParams.limit"
+    :page-sizes="[10, 20, 50, 100]" @size-change="fetchData" @current-change="fetchData"
+    layout="total, sizes, prev, pager, next" :total="total" />
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue";
-import { GetSysUserListByPage, SaveSysUser } from "@/api/sysUser";
+import { GetSysUserListByPage, SaveSysUser, UpdateSysUser } from "@/api/sysUser";
 import { ElMessage } from "element-plus";
 
 // 表格数据模型
@@ -151,20 +138,26 @@ const resetData = () => {
 
 // 定义提交表单数据模型
 const defaultForm = {
-    userName:"",
-    name: "" ,
-    phone: "" ,
-    password: "" ,
-    description:"",
-    avatar: ""
-}
-const sysUser = ref(defaultForm)
+  userName: "",
+  name: "",
+  phone: "",
+  password: "",
+  description: "",
+  avatar: "",
+};
+const sysUser = ref(defaultForm);
 
 //添加用户
-const dialogVisible = ref(false)
+const dialogVisible = ref(false);
 function addShow() {
-    sysUser.value = {}
-    dialogVisible.value = true;
+  sysUser.value = {};
+  dialogVisible.value = true;
+}
+
+// 修改按钮点击事件处理函数
+function editSysUser(row) {
+  dialogVisible.value = true
+  sysUser.value = { ...row }
 }
 
 // 定义分页查询方法
@@ -182,14 +175,24 @@ const fetchData = async () => {
 
 //提交用户信息
 async function submit() {
-    const {code, msg} = await SaveSysUser(sysUser.value);
+  if (!sysUser.value.id) {
+    const { code, msg } = await SaveSysUser(sysUser.value);
     if (code === 200) {
-        dialogVisible.value = false;
-        ElMessage.success(msg);
-        fetchData();
+      dialogVisible.value = false;
+      ElMessage.success(msg);
+      fetchData();
     } else {
-        ElMessage.error(msg);
+      ElMessage.error(msg);
     }
+  } else {
+    const { code, msg } = await UpdateSysUser(sysUser.value);
+    if (code === 200) {
+      dialogVisible.value = false;
+      ElMessage.success(msg);
+      fetchData();
+    }
+  }
+
 }
 </script>
 
