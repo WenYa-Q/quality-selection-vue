@@ -140,6 +140,8 @@ export default defineComponent({
               useApp().initToken(data);
             } else {
               ctx.$message.error(message);
+              state.refreshCaptcha();
+              state.model.captcha = "";
             }
             state.loading = false;
           }
