@@ -30,7 +30,16 @@ export const UpdateSysUser = (sysUser) => {
 // 根据id删除用户
 export const DeleteSysUserById = (userId) => {
   return request({
-      url: "/system/sysUser/deleteById/" + userId,
-      method: 'delete'
-  })
-}
+    url: "/system/sysUser/deleteById/" + userId,
+    method: "delete",
+  });
+};
+
+// 给用户分配角色请求
+export const DoAssignRoleToUser = (assginRoleVo) => {
+  return request({
+    url: "/system/sysUserRole/doAssign",
+    method: "post",
+    data: assginRoleVo,
+  });
+};
