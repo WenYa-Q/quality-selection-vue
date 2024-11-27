@@ -3,7 +3,7 @@ import request from "@/utils/request";
 // 分页查询角色数据
 export const GetSysRoleListByPage = (pageNum, pageSize, queryDto) => {
   return request({
-    url: "/sys/role/findByPage/" + pageNum + "/" + pageSize,
+    url: "/system/sysRole/findByPage/" + pageNum + "/" + pageSize,
     method: "get",
     params: queryDto,
   });
@@ -12,7 +12,7 @@ export const GetSysRoleListByPage = (pageNum, pageSize, queryDto) => {
 // 添加角色请求方法
 export const SaveSysRole = (data) => {
   return request({
-    url: "/sys/role/saveSysRole",
+    url: "/system/sysRole/saveSysRole",
     method: "post",
     data,
   });
@@ -21,7 +21,7 @@ export const SaveSysRole = (data) => {
 // 保存修改
 export const UpdateSysRole = (data) => {
   return request({
-    url: "/sys/role/updateSysRole",
+    url: "/system/sysRole/updateSysRole",
     method: "put",
     data,
   });
@@ -30,7 +30,15 @@ export const UpdateSysRole = (data) => {
 // 删除角色
 export const DeleteSysRoleById = (roleId) => {
   return request({
-    url: "/sys/role/deleteById/" + roleId,
+    url: "/system/sysRole/deleteById/" + roleId,
     method: "delete",
+  });
+};
+
+// 查询所有的角色数据
+export const GetAllRoleList = () => {
+  return request({
+    url: "/system/sysRole/findAllRoles",
+    method: "get",
   });
 };
