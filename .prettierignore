@@ -9,3 +9,4 @@ public
 
 src/assets
 .stylelintrc.cjs
+commitlint.config.cjs
