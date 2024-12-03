@@ -8,5 +8,3 @@ public
 *.md
 
 src/assets
-.stylelintrc.cjs
-commitlint.config.cjs
