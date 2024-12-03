@@ -34,3 +34,12 @@ export const RemoveSysMenuById = (id) => {
     method: "delete",
   });
 };
+
+// 获取菜单
+export const GetMenus = (params) => {
+  return request({
+    url: "/system/sysMenu/menus",
+    method: "get",
+    params,
+  });
+};
