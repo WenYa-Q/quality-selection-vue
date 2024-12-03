@@ -11,7 +11,9 @@
 			"source.fixAll.eslint": "explicit",
 			"source.fixAll.stylelint": "explicit"
 		},
-		"stylelint.validate": ["css", "scss", "vue", "html"]
+		"[vue]": {
+			"editor.defaultFormatter": "esbenp.prettier-vscode"
+		}
 	}
 	
 }
