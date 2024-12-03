@@ -16,7 +16,7 @@
     "lint:eslint": "eslint \"src/**/*.{vue,ts,js}\" --fix",
     "lint:lint-staged": "lint-staged",
     "commit": "git-cz",
-    "lint:prettier": "prettier --write \"**/*.{js,ts,json,css,less,scss,vue,html,md}\"",
+    "lint:prettier": "prettier --write \"**/*.{js,cjs,ts,json,tsx,css,less,scss,vue,html,md}\"",
     "lint:stylelint": "stylelint --fix --allow-empty-input",
     "lint": "eslint --fix --ext .js,.vue src"
   },
