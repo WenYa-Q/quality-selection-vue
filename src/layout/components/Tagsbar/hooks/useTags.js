@@ -76,7 +76,9 @@ export const useTags = () => {
       }
     }
     // 不在路由中的所有标签，需要删除
-    const noUseTags = tagList.value.filter((tag) => routes.value.every((route) => route.name !== tag.name));
+    const noUseTags = tagList.value.filter((tag) =>
+      routes.value.every((route) => route.name !== tag.name)
+    );
     noUseTags.forEach((tag) => {
       delTag(tag);
     });

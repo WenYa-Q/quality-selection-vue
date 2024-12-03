@@ -42,7 +42,12 @@
       :label-width="search.labelWidth"
       ref="searchForm"
     >
-      <el-form-item v-for="item in search.fields" :key="item.name" :label="$t(item.label)" :prop="item.name">
+      <el-form-item
+        v-for="item in search.fields"
+        :key="item.name"
+        :label="$t(item.label)"
+        :prop="item.name"
+      >
         <slot v-if="item.type === 'custom'" :name="item.slot" />
         <el-select
           v-else-if="item.type === 'select'"
@@ -92,7 +97,11 @@
           v-else-if="item.type === 'checkbox-button'"
           :style="{ width: search.inputWidth, ...item.style }"
         >
-          <el-checkbox-button v-for="option of item.options" :key="option.value" :label="option.value">
+          <el-checkbox-button
+            v-for="option of item.options"
+            :key="option.value"
+            :label="option.value"
+          >
             {{ $t(option.name) }}
           </el-checkbox-button>
         </el-checkbox-group>
@@ -246,7 +255,10 @@ const formatDate = (date, format) => {
   }
   for (var k in obj) {
     if (new RegExp("(" + k + ")").test(format)) {
-      format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? obj[k] : ("00" + obj[k]).substr(("" + obj[k]).length));
+      format = format.replace(
+        RegExp.$1,
+        RegExp.$1.length == 1 ? obj[k] : ("00" + obj[k]).substr(("" + obj[k]).length)
+      );
     }
   }
   return format;

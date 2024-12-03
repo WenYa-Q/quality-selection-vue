@@ -22,7 +22,12 @@
 
 <template>
   <div class="tags-container" :class="{ hide: !isTagsbarShow }">
-    <el-scrollbar ref="scrollContainer" :vertical="false" class="scroll-container" @wheel.prevent="onScroll">
+    <el-scrollbar
+      ref="scrollContainer"
+      :vertical="false"
+      class="scroll-container"
+      @wheel.prevent="onScroll"
+    >
       <router-link
         v-for="(tag, i) in tagList"
         :key="tag.fullPath"

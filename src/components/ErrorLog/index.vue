@@ -55,13 +55,15 @@
     <el-dialog v-model="dialogTableVisible" width="80%" append-to-body>
       <template #title>
         <span style="padding-right: 10px">错误日志</span>
-        <el-button size="mini" type="primary" icon="el-icon-delete" @click="clearAll"> Clear All </el-button>
+        <el-button size="mini" type="primary" icon="el-icon-delete" @click="clearAll">
+          Clear All
+        </el-button>
       </template>
       <el-table :data="errorLogs" border>
         <el-table-column label="Message">
           <template #default="{ row }">
             <div style="margin-bottom: 10px">
-              <span class="message-title" style="padding-right: 16px"> 页面: </span>
+              <span class="message-title" style="padding-right: 16px">页面:</span>
               <el-tag type="success">
                 {{ row.url }}
               </el-tag>
@@ -82,7 +84,7 @@
             </div>
 
             <div v-if="row.err && row.err.config">
-              <span class="message-title" style="padding-right: 16px"> 接口地址: </span>
+              <span class="message-title" style="padding-right: 16px">接口地址:</span>
               <el-tag type="info">
                 {{ row.err && row.err.config && row.err.config.url }}
               </el-tag>

@@ -451,7 +451,8 @@ lesshat-selector {
   background-clip: padding-box;
   border-radius: 8px;
   transform-origin: center 180px;
-  animation: second-grow 1.6s cubic-bezier(1, 0, 0, 1) 1.45s 1 forwards, second 60s normal infinite steps(60, end) 3s;
+  animation: second-grow 1.6s cubic-bezier(1, 0, 0, 1) 1.45s 1 forwards,
+    second 60s normal infinite steps(60, end) 3s;
 }
 
 .second .hand::before lesshat-selector {

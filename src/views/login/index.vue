@@ -25,7 +25,12 @@
 
       <el-form-item prop="captcha">
         <div class="captcha">
-          <el-input class="text" v-model="model.captcha" prefix-icon="Picture" placeholder="请输入验证码"></el-input>
+          <el-input
+            class="text"
+            v-model="model.captcha"
+            prefix-icon="Picture"
+            placeholder="请输入验证码"
+          ></el-input>
           <img :src="captchaSrc" @click="refreshCaptcha" />
         </div>
       </el-form-item>
@@ -43,7 +48,16 @@
 </template>
 
 <script>
-import { defineComponent, getCurrentInstance, reactive, toRefs, ref, computed, onMounted, watch } from "vue";
+import {
+  defineComponent,
+  getCurrentInstance,
+  reactive,
+  toRefs,
+  ref,
+  computed,
+  onMounted,
+  watch,
+} from "vue";
 import { Login, GetValidateCode } from "@/api/login";
 import { useRouter, useRoute } from "vue-router";
 import ChangeLang from "@/layout/components/Topbar/ChangeLang.vue";

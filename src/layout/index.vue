@@ -78,7 +78,9 @@ export default defineComponent({
     const isTopbarFixed = defaultSettings.topbar.isFixed;
     const isMenusShow = defaultSettings.menus.isShow;
     const isHorizontalMenu = defaultSettings.menus.mode === "horizontal";
-    const isBreadcrumbsShow = computed(() => isHorizontalMenu && defaultSettings.breadcrumbs.isShow);
+    const isBreadcrumbsShow = computed(
+      () => isHorizontalMenu && defaultSettings.breadcrumbs.isShow
+    );
     const paddingFlag = ref(true);
     const handleBreadcrumbsChange = (boo) => {
       paddingFlag.value = boo;

@@ -148,7 +148,11 @@ const submit = async () => {
 
 //获取表格数据
 const fetchData = async () => {
-  const data = await GetSysRoleListByPage(pageParamsForm.value.pageNum, pageParamsForm.value.pageSize, queryDto.value);
+  const data = await GetSysRoleListByPage(
+    pageParamsForm.value.pageNum,
+    pageParamsForm.value.pageSize,
+    queryDto.value
+  );
   list.value = data.list;
   total.value = data.total;
 };

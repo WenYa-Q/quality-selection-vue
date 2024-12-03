@@ -86,7 +86,11 @@ export const useMenus = defineStore("menu", () => {
       const item = {
         ...obj,
       };
-      item.path = item.path.startsWith("/") ? item.path : parentPath ? `${parentPath}/${item.path}` : item.path;
+      item.path = item.path.startsWith("/")
+        ? item.path
+        : parentPath
+        ? `${parentPath}/${item.path}`
+        : item.path;
       if (parentName) {
         item.meta.parent = parentName;
       }

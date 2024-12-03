@@ -90,7 +90,9 @@ export default defineComponent({
 
     const isShowHamburger = computed(() => !isHorizontalMenu.value);
 
-    const isShowBreadcrumbs = computed(() => defaultSettings.breadcrumbs.isShow && !isHorizontalMenu.value);
+    const isShowBreadcrumbs = computed(
+      () => defaultSettings.breadcrumbs.isShow && !isHorizontalMenu.value
+    );
 
     return {
       device,

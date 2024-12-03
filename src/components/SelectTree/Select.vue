@@ -73,7 +73,12 @@
     collapse-tags
     :placeholder="placeholder"
   >
-    <el-option v-for="(item, index) in selectOptions" :key="index" :label="item[treeProps.label]" :value="item" />
+    <el-option
+      v-for="(item, index) in selectOptions"
+      :key="index"
+      :label="item[treeProps.label]"
+      :value="item"
+    />
   </el-select>
 </template>
 <script>
@@ -137,7 +142,10 @@ export default defineComponent({
         return res;
       },
       handleRemove() {
-        emit("select-change", multiple ? state.selectValue.map((item) => item[nodeKey]) : state.selectValue[nodeKey]);
+        emit(
+          "select-change",
+          multiple ? state.selectValue.map((item) => item[nodeKey]) : state.selectValue[nodeKey]
+        );
       },
       handleClear() {
         emit("select-change", multiple ? [] : "");

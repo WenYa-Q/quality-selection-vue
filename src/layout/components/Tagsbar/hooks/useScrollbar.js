@@ -73,7 +73,9 @@ export const useScrollbar = (tagsItem) => {
     } else {
       const el = currentTag.$el.nextElementSibling;
 
-      el.offsetLeft + el.offsetWidth > $wrap.offsetWidth ? doScroll(el.offsetLeft - el.offsetWidth) : doScroll(0);
+      el.offsetLeft + el.offsetWidth > $wrap.offsetWidth
+        ? doScroll(el.offsetLeft - el.offsetWidth)
+        : doScroll(0);
     }
   };
 

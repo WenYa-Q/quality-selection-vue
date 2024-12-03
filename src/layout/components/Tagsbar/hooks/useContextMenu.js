@@ -89,11 +89,15 @@ export const useContextMenu = (tagList) => {
     closeSomeTags(direction) {
       const index = tagList.value.findIndex((item) => item.fullPath === state.selectedTag.fullPath);
 
-      if ((direction === "left" && index <= 0) || (direction === "right" && index >= tagList.value.length - 1)) {
+      if (
+        (direction === "left" && index <= 0) ||
+        (direction === "right" && index >= tagList.value.length - 1)
+      ) {
         return;
       }
 
-      const needToClose = direction === "left" ? tagList.value.slice(0, index) : tagList.value.slice(index + 1);
+      const needToClose =
+        direction === "left" ? tagList.value.slice(0, index) : tagList.value.slice(index + 1);
       tagsStore.delSomeTags(needToClose);
       router.push(state.selectedTag);
     },

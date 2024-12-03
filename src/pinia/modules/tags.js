@@ -77,7 +77,9 @@ export const useTags = defineStore("tags", {
       this.cacheList = this.cacheList.filter((v) => v === tag.name);
     },
     delSomeTags(tags) {
-      this.tagList = this.tagList.filter((v) => !!v.meta.affix || tags.every((tag) => tag.path !== v.path));
+      this.tagList = this.tagList.filter(
+        (v) => !!v.meta.affix || tags.every((tag) => tag.path !== v.path)
+      );
       // 保存到localStorage
       setItem(TAGLIST, this.tagList);
 

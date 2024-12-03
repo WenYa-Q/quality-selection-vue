@@ -5,7 +5,11 @@
       <el-row>
         <el-col :span="12">
           <el-form-item label="关键字">
-            <el-input v-model="queryDto.keyword" style="width: 100%" placeholder="用户名"></el-input>
+            <el-input
+              v-model="queryDto.keyword"
+              style="width: 100%"
+              placeholder="用户名"
+            ></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
@@ -134,7 +138,13 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import { GetSysUserListByPage, SaveSysUser, UpdateSysUser, DeleteSysUserById, DoAssignRoleToUser } from "@/api/sysUser";
+import {
+  GetSysUserListByPage,
+  SaveSysUser,
+  UpdateSysUser,
+  DeleteSysUserById,
+  DoAssignRoleToUser,
+} from "@/api/sysUser";
 import { ElMessage, ElMessageBox } from "element-plus";
 import { useApp } from "@/pinia/modules/app";
 import { GetAllRoleList } from "@/api/sysRole";
@@ -207,7 +217,11 @@ const fetchData = async () => {
     queryDto.value.createTimeEnd = createTimes.value[1];
   }
   // 请求后端接口进行分页查询
-  const data = await GetSysUserListByPage(pageParams.value.page, pageParams.value.limit, queryDto.value);
+  const data = await GetSysUserListByPage(
+    pageParams.value.page,
+    pageParams.value.limit,
+    queryDto.value
+  );
 
   list.value = data.list;
   total.value = data.total;
