@@ -9,3 +9,12 @@ export const GetBrandPageList = (page, limit) => {
     method: "get",
   });
 };
+
+// 保存品牌
+export const SaveBrand = (brand) => {
+  return request({
+    url: `${api_name}/save`,
+    method: "post",
+    data: brand,
+  });
+};
