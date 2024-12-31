@@ -1,6 +1,6 @@
 <template>
   <div class="tools-div">
-    <el-button type="success" size="small">添 加</el-button>
+    <el-button type="success" size="small" @click="addShow">添 加</el-button>
   </div>
 
   <el-table :data="list" style="width: 100%">
@@ -9,7 +9,7 @@
       <div
         v-for="(item1, index1) in scope.row.specValue"
         :key="index1"
-        style="padding: 5px; margin: 0;width: 100%;"
+        style="width: 100%;padding: 5px; margin: 0;"
       >
         {{ item1.key }}：
         <span v-for="(item2, index2) in item1.valueList" :key="index2" class="div-atrr">
@@ -65,8 +65,8 @@
         </el-row>
       </el-form-item>
       <el-form-item align="right">
-        <el-button type="primary">提交</el-button>
-        <el-button>取消</el-button>
+        <el-button type="primary" @click="saveOrUpdate">提交</el-button>
+        <el-button @click="dialogVisible = false">取消</el-button>
       </el-form-item>
     </el-form>
   </el-dialog>
@@ -74,7 +74,8 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import { GetProductSpecPageList } from "@/api/productSpec";
+import { GetProductSpecPageList, SaveProductSpec } from "@/api/productSpec";
+import { ElMessage, ElMessageBox } from "element-plus";
 
 // 表格数据模型
 const list = ref([]);
@@ -132,6 +133,50 @@ const fetchData = async () => {
   totals = total;
 };
 
+//进入添加
+const addShow = () => {
+  dialogVisible.value = true;
+  productSpec.value = {
+    id: "",
+    specName: "",
+    specValue: [],
+  };
+};
+
+// 页面添加规格操作
+const addSpec = () => {
+  productSpec.value.specValue.push({});
+};
+
+// 保存数据
+const saveData = async () => {
+  // 需要将productSpec.value.specValue转换成json字符串提交到后端，通过clone一个新的对象进行实现
+  const productSpecClone = JSON.parse(JSON.stringify(productSpec.value));
+
+  // 将productSpecClone.specValue.valueList转换成数组，因为后端需要的数组格式的数据[{"key":"内存","valueList":["8G","18G","32G"]}]
+  // v-model绑定的数据模型为字符串
+  productSpecClone.specValue.forEach((item) => {
+    item.valueList = item.valueList.split(",");
+  });
+  productSpecClone.specValue = JSON.stringify(productSpecClone.specValue);
+
+  console.log(productSpecClone);
+
+  // 提交表单
+  await SaveProductSpec(productSpecClone);
+
+  dialogVisible.value = false;
+  ElMessage.success("操作成功");
+  fetchData();
+};
+
+// 提交表单
+const saveOrUpdate = async () => {
+  if (!productSpec.value.id) {
+    saveData();
+  }
+};
+
 // 钩子函数
 onMounted(() => {
   fetchData();
@@ -140,11 +185,11 @@ onMounted(() => {
 
 <style scoped>
 .tools-div {
-  margin: 10px 0;
   padding: 10px;
+  margin: 10px 0;
+  background-color: #fff;
   border: 1px solid #ebeef5;
   border-radius: 3px;
-  background-color: #fff;
 }
 
 .div-atrr {

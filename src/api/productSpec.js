@@ -9,3 +9,12 @@ export const GetProductSpecPageList = (page, limit) => {
     method: "get",
   });
 };
+
+// 保存信息
+export const SaveProductSpec = (productSpec) => {
+  return request({
+    url: `${api_name}/save`,
+    method: "post",
+    data: productSpec,
+  });
+};
