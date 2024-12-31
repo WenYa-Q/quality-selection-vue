@@ -10,6 +10,14 @@ export const GetBrandPageList = (page, limit) => {
   });
 };
 
+//查找全部
+export const GetBrandAllList = () => {
+  return request({
+    url: `${api_name}/findAll`,
+    method: "get",
+  });
+};
+
 // 保存品牌
 export const SaveBrand = (brand) => {
   return request({
