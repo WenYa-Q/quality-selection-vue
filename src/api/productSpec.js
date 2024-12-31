@@ -27,3 +27,11 @@ export const UpdateProductSpecById = (productSpec) => {
     data: productSpec,
   });
 };
+
+// 根据id删除数据
+export const DeleteProductSpecById = (id) => {
+  return request({
+    url: `${api_name}/deleteById/${id}`,
+    method: "delete",
+  });
+};

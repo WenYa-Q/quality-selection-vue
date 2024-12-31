@@ -22,7 +22,7 @@
       <el-button type="primary" size="small" @click="editShow(scope.row)">
         修改
       </el-button>
-      <el-button type="danger" size="small">
+      <el-button type="danger" size="small" @click="remove(scope.row.id)">
         删除
       </el-button>
     </el-table-column>
@@ -60,7 +60,7 @@
             />
           </el-col>
           <el-col :span="4">
-            <el-button size="default" type="danger">删除</el-button>
+            <el-button size="default" type="danger" @click="delSpec(index)">删除</el-button>
           </el-col>
         </el-row>
       </el-form-item>
@@ -74,7 +74,12 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import { GetProductSpecPageList, SaveProductSpec, UpdateProductSpecById } from "@/api/productSpec";
+import {
+  GetProductSpecPageList,
+  SaveProductSpec,
+  UpdateProductSpecById,
+  DeleteProductSpecById,
+} from "@/api/productSpec";
 import { ElMessage, ElMessageBox } from "element-plus";
 
 // 表格数据模型
@@ -207,6 +212,28 @@ const updateData = async () => {
   dialogVisible.value = false;
   ElMessage.success("操作成功");
   fetchData();
+};
+
+// 页面删除规格元素
+const delSpec = (index) => {
+  productSpec.value.specValue.splice(index, 1);
+};
+
+//删除
+const remove = async (id) => {
+  ElMessageBox.confirm("此操作将永久删除该记录, 是否继续?", "Warning", {
+    confirmButtonText: "确定",
+    cancelButtonText: "取消",
+    type: "warning",
+  })
+    .then(async () => {
+      await DeleteProductSpecById(id);
+      ElMessage.success("删除成功");
+      fetchData();
+    })
+    .catch(() => {
+      ElMessage.info("取消删除");
+    });
 };
 
 // 钩子函数
