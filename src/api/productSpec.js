@@ -18,3 +18,12 @@ export const SaveProductSpec = (productSpec) => {
     data: productSpec,
   });
 };
+
+// 修改信息
+export const UpdateProductSpecById = (productSpec) => {
+  return request({
+    url: `${api_name}/updateById`,
+    method: "put",
+    data: productSpec,
+  });
+};

@@ -18,8 +18,8 @@
       </div>
     </el-table-column>
     <el-table-column prop="createTime" label="创建时间" />
-    <el-table-column label="操作" align="center" width="200">
-      <el-button type="primary" size="small">
+    <el-table-column label="操作" align="center" width="200" #default="scope">
+      <el-button type="primary" size="small" @click="editShow(scope.row)">
         修改
       </el-button>
       <el-button type="danger" size="small">
@@ -74,7 +74,7 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import { GetProductSpecPageList, SaveProductSpec } from "@/api/productSpec";
+import { GetProductSpecPageList, SaveProductSpec, UpdateProductSpecById } from "@/api/productSpec";
 import { ElMessage, ElMessageBox } from "element-plus";
 
 // 表格数据模型
@@ -143,6 +143,12 @@ const addShow = () => {
   };
 };
 
+//进入修改
+const editShow = (row) => {
+  productSpec.value = row;
+  dialogVisible.value = true;
+};
+
 // 页面添加规格操作
 const addSpec = () => {
   productSpec.value.specValue.push({});
@@ -174,7 +180,33 @@ const saveData = async () => {
 const saveOrUpdate = async () => {
   if (!productSpec.value.id) {
     saveData();
+  } else {
+    updateData();
   }
+};
+
+// 保存修改
+const updateData = async () => {
+  // 需要将productSpec.value.specValue转换成json字符串提交到后端，通过clone一个新的对象进行实现
+  const productSpecClone = JSON.parse(JSON.stringify(productSpec.value));
+
+  // 将productSpecClone.specValue.valueList转换成数组，因为后端需要的数组格式的数据[{"key":"内存","valueList":["8G","18G","32G"]}]
+  // v-model绑定的数据模型为字符串
+  productSpecClone.specValue.forEach((item) => {
+    console.log(typeof item.valueList);
+    if (typeof item.valueList === "string") {
+      // 针对规格数据修改完毕以后数据类型有可能会变成string，针对string类型的数据将其转换成数组
+      item.valueList = item.valueList.split(",");
+    }
+  });
+  productSpecClone.specValue = JSON.stringify(productSpecClone.specValue);
+
+  // 提交表单
+  await UpdateProductSpecById(productSpecClone);
+
+  dialogVisible.value = false;
+  ElMessage.success("操作成功");
+  fetchData();
 };
 
 // 钩子函数
