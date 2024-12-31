@@ -9,8 +9,8 @@
       <img :src="scope.row.logo" width="50" />
     </el-table-column>
     <el-table-column prop="createTime" label="创建时间" />
-    <el-table-column label="操作" align="center" width="200">
-      <el-button type="primary" size="small">
+    <el-table-column label="操作" align="center" width="200" #default="scope">
+      <el-button type="primary" size="small" @click="editShow(scope.row)">
         修改
       </el-button>
       <el-button type="danger" size="small">
@@ -24,7 +24,7 @@
     v-model:page-size="pageParams.limit"
     :page-sizes="[10, 20, 50, 100]"
     layout="total, sizes, prev, pager, next"
-    :total="total"
+    :total="totals"
     @size-change="handleSizeChange"
     @current-change="handleCurrentChange"
   />
@@ -56,7 +56,7 @@
 
 <script setup>
 import { onMounted, ref } from "vue";
-import { GetBrandPageList, SaveBrand } from "@/api/brand.js";
+import { GetBrandPageList, SaveBrand, UpdateBrandById } from "@/api/brand.js";
 import { ElMessage } from "element-plus";
 import { useApp } from "@/pinia/modules/app";
 
@@ -64,7 +64,7 @@ import { useApp } from "@/pinia/modules/app";
 const list = ref([]);
 
 // 分页条数据模型
-const total = ref(0);
+let totals = ref(0);
 
 //分页条数据模型
 const pageParamsForm = {
@@ -91,7 +91,7 @@ const handleCurrentChange = (number) => {
 const fetchData = async () => {
   const { rows, total } = await GetBrandPageList(pageParams.value.page, pageParams.value.limit);
   list.value = rows;
-  total.value = total;
+  totals = total;
 };
 
 const headers = {
@@ -123,12 +123,28 @@ const handleAvatarSuccess = (response) => {
 const saveOrUpdate = () => {
   if (!brand.value.id) {
     saveData();
+  } else {
+    updateData();
   }
 };
 
 // 新增
 const saveData = async () => {
   await SaveBrand(brand.value);
+  dialogVisible.value = false;
+  ElMessage.success("操作成功");
+  fetchData();
+};
+
+//进入修改
+const editShow = (row) => {
+  brand.value = row;
+  dialogVisible.value = true;
+};
+
+// 修改
+const updateData = async () => {
+  await UpdateBrandById(brand.value);
   dialogVisible.value = false;
   ElMessage.success("操作成功");
   fetchData();
