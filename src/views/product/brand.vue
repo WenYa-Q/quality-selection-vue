@@ -71,10 +71,10 @@ const fetchData = async () => {
 
 <style scoped>
 .tools-div {
-  margin: 10px 0;
   padding: 10px;
+  margin: 10px 0;
+  background-color: #fff;
   border: 1px solid #ebeef5;
   border-radius: 3px;
-  background-color: #fff;
 }
 </style>
